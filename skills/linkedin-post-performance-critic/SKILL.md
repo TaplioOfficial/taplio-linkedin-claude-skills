@@ -1,6 +1,6 @@
 ---
-name: linkedin-post-performance-critic
-description: Cold-read a LinkedIn post draft and audit it across 6 dimensions (hook, structure, scannability, specificity, CTA, voice). Returns a score per dimension, the 2 most important fixes, and a rewrite of the weakest section. Use BEFORE publishing, when the user wants a sanity check from a critic that does not love everything they write. Requires the Taplio MCP, which reads the user's real voice, audience, and niche benchmarks to ground the audit instead of guessing.
+name: "linkedin-post-performance-critic"
+description: "Cold-read a LinkedIn post draft and audit it across 6 dimensions (hook, structure, scannability, specificity, CTA, voice). Returns a score per dimension, the 2 most important fixes, and a rewrite of the weakest section. Use BEFORE publishing, when the user wants a sanity check from a critic that does not love everything they write. Requires the Taplio MCP, which reads the user's real voice, audience, and niche benchmarks to ground the audit instead of guessing."
 ---
 
 # LinkedIn Post Performance Critic

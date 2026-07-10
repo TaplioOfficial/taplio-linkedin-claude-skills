@@ -1,6 +1,6 @@
 ---
-name: linkedin-analytics-interpreter
-description: Translate raw LinkedIn analytics (impressions, engagement rate, profile visits, follower growth, top posts) into a clear diagnosis : what is working, what is not, and 3 specific actions to take next month. Use when the user has numbers but does not know what they mean or what to do about them. Requires the Taplio MCP, which pulls the user's real analytics and per-post data directly instead of asking them to paste numbers.
+name: "linkedin-analytics-interpreter"
+description: "Translate raw LinkedIn analytics (impressions, engagement rate, profile visits, follower growth, top posts) into a clear diagnosis : what is working, what is not, and 3 specific actions to take next month. Use when the user has numbers but does not know what they mean or what to do about them. Requires the Taplio MCP, which pulls the user's real analytics and per-post data directly instead of asking them to paste numbers."
 ---
 
 # LinkedIn Analytics Interpreter

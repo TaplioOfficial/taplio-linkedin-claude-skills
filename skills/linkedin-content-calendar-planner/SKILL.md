@@ -1,6 +1,6 @@
 ---
-name: linkedin-content-calendar-planner
-description: Generate a 4-week LinkedIn content calendar tuned to the user's pillars, posting cadence, and audience. Returns a day-by-day plan with topic, format, hook angle, and CTA per post. Use when the user wants a system for the next month instead of inventing content every morning. Once the plan is confirmed it writes a complete, publish-ready post for every slot, creates them all as Taplio drafts, keeps the calendar in memory, and only schedules each draft after the user has reviewed and approved it. Requires the Taplio MCP.
+name: "linkedin-content-calendar-planner"
+description: "Generate a 4-week LinkedIn content calendar tuned to the user's pillars, posting cadence, and audience. Returns a day-by-day plan with topic, format, hook angle, and CTA per post. Use when the user wants a system for the next month instead of inventing content every morning. Once the plan is confirmed it writes a complete, publish-ready post for every slot, creates them all as Taplio drafts, keeps the calendar in memory, and only schedules each draft after the user has reviewed and approved it. Requires the Taplio MCP."
 ---
 
 # LinkedIn Content Calendar Planner

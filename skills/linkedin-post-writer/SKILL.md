@@ -1,6 +1,6 @@
 ---
-name: linkedin-post-writer
-description: Write a publish-ready LinkedIn post from a raw idea. Pick a format (storytelling, opinion, listicle, contrarian, experience-recap), generate hook + body + CTA, and return three variants so the user can pick the strongest. Use whenever the user has a topic but no draft. Requires the Taplio MCP to pull the user's live LinkedIn voice and proven angles, then save the chosen variant as a draft.
+name: "linkedin-post-writer"
+description: "Write a publish-ready LinkedIn post from a raw idea. Pick a format (storytelling, opinion, listicle, contrarian, experience-recap), generate hook + body + CTA, and return three variants so the user can pick the strongest. Use whenever the user has a topic but no draft. Requires the Taplio MCP to pull the user's live LinkedIn voice and proven angles, then save the chosen variant as a draft."
 ---
 
 # LinkedIn Post Writer

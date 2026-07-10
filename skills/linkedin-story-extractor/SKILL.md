@@ -1,6 +1,6 @@
 ---
-name: linkedin-story-extractor
-description: Extract a publishable LinkedIn story from a raw user experience. The user dumps an experience (a project, a failure, a win, a meeting, a conversation), and the skill structures it into a story-arc post (situation, tension, turning point, lesson). Use when the user has lived something but does not know how to turn it into content. Requires the Taplio MCP to pull proven story angles from the user's niche and save the finished story as a draft.
+name: "linkedin-story-extractor"
+description: "Extract a publishable LinkedIn story from a raw user experience. The user dumps an experience (a project, a failure, a win, a meeting, a conversation), and the skill structures it into a story-arc post (situation, tension, turning point, lesson). Use when the user has lived something but does not know how to turn it into content. Requires the Taplio MCP to pull proven story angles from the user's niche and save the finished story as a draft."
 ---
 
 # LinkedIn Story Extractor

@@ -1,6 +1,6 @@
 ---
-name: linkedin-audience-persona-builder
-description: Build a sharp, post-ready persona of the user's target LinkedIn audience : role, pains, jobs to be done, vocabulary, aspirations, what content they consume, what objections they raise. Use when the user is starting on LinkedIn or when their content does not resonate (low comments, no DMs, traffic without conversion). Requires the Taplio MCP, which seeds the persona from the user's live target audience and cross-checks the vocabulary against real posts.
+name: "linkedin-audience-persona-builder"
+description: "Build a sharp, post-ready persona of the user's target LinkedIn audience : role, pains, jobs to be done, vocabulary, aspirations, what content they consume, what objections they raise. Use when the user is starting on LinkedIn or when their content does not resonate (low comments, no DMs, traffic without conversion). Requires the Taplio MCP, which seeds the persona from the user's live target audience and cross-checks the vocabulary against real posts."
 ---
 
 # LinkedIn Audience Persona Builder

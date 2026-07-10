@@ -1,6 +1,6 @@
 ---
-name: linkedin-viral-post-analyzer
-description: Decode why a specific LinkedIn post performed unusually well. Breaks the post down into hook, structure, format, emotional triggers, timing, and audience match, then produces a reusable template the user can apply to their own content. Requires the Taplio MCP to pull live viral posts to study and fetch the user's own posts and analytics. Use when the user pastes a viral post they want to learn from.
+name: "linkedin-viral-post-analyzer"
+description: "Decode why a specific LinkedIn post performed unusually well. Breaks the post down into hook, structure, format, emotional triggers, timing, and audience match, then produces a reusable template the user can apply to their own content. Requires the Taplio MCP to pull live viral posts to study and fetch the user's own posts and analytics. Use when the user pastes a viral post they want to learn from."
 ---
 
 # LinkedIn Viral Post Analyzer

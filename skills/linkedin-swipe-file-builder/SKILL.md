@@ -1,6 +1,6 @@
 ---
-name: linkedin-swipe-file-builder
-description: Help the user assemble a personal swipe file of high-performing LinkedIn posts, organized by hook pattern, format, and angle. The skill defines the structure, asks for inputs, turns saved posts into a usable reference library, then drafts the user's own post for every reference in the file (reusing structure, not substance) and saves the approved ones as drafts. It seeds the file with real high-performing posts from the live inspiration index and the user's own top performers. Use when the user wants to systematically learn from what works without copying it. Requires the Taplio MCP.
+name: "linkedin-swipe-file-builder"
+description: "Help the user assemble a personal swipe file of high-performing LinkedIn posts, organized by hook pattern, format, and angle. The skill defines the structure, asks for inputs, turns saved posts into a usable reference library, then drafts the user's own post for every reference in the file (reusing structure, not substance) and saves the approved ones as drafts. It seeds the file with real high-performing posts from the live inspiration index and the user's own top performers. Use when the user wants to systematically learn from what works without copying it. Requires the Taplio MCP."
 ---
 
 # LinkedIn Swipe File Builder

@@ -1,6 +1,6 @@
 ---
-name: linkedin-trending-topics-scanner
-description: Surface the topics that are heating up right now in a given LinkedIn niche, with concrete angles the user can post about today. Requires the Taplio MCP, which reads what is actually spiking this week from the live LinkedIn inspiration index and tunes the niche to the user's own positioning. Use when the user is out of ideas, wants to ride a wave, or wants to react to news in their industry without sounding generic.
+name: "linkedin-trending-topics-scanner"
+description: "Surface the topics that are heating up right now in a given LinkedIn niche, with concrete angles the user can post about today. Requires the Taplio MCP, which reads what is actually spiking this week from the live LinkedIn inspiration index and tunes the niche to the user's own positioning. Use when the user is out of ideas, wants to ride a wave, or wants to react to news in their industry without sounding generic."
 ---
 
 # LinkedIn Trending Topics Scanner

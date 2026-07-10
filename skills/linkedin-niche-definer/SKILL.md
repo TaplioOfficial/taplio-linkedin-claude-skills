@@ -1,6 +1,6 @@
 ---
-name: linkedin-niche-definer
-description: Help the user define (or sharpen) their LinkedIn niche : audience, problem they solve, unique angle, and one-line positioning. The skill walks the user through a 7-question diagnostic, then synthesizes a positioning statement they can use across headline, About, and posts. Use when the user says "I do not know what to post about" or "my content is too broad". Requires the Taplio MCP, which pulls the user's live self-description, audience, and reach stats to ground the positioning in real data.
+name: "linkedin-niche-definer"
+description: "Help the user define (or sharpen) their LinkedIn niche : audience, problem they solve, unique angle, and one-line positioning. The skill walks the user through a 7-question diagnostic, then synthesizes a positioning statement they can use across headline, About, and posts. Use when the user says \"I do not know what to post about\" or \"my content is too broad\". Requires the Taplio MCP, which pulls the user's live self-description, audience, and reach stats to ground the positioning in real data."
 ---
 
 # LinkedIn Niche Definer

@@ -1,6 +1,6 @@
 ---
-name: linkedin-profile-optimizer
-description: Audit a LinkedIn profile (headline, banner copy, About, featured section, experience) and return prioritized fixes with rewritten copy. Optimizes for the user's positioning : do visitors instantly understand who they help, with what, and how to engage. Use when the user is starting on LinkedIn, repositioning, or watching their profile-visit-to-follow ratio drop. Requires the Taplio MCP.
+name: "linkedin-profile-optimizer"
+description: "Audit a LinkedIn profile (headline, banner copy, About, featured section, experience) and return prioritized fixes with rewritten copy. Optimizes for the user's positioning : do visitors instantly understand who they help, with what, and how to engage. Use when the user is starting on LinkedIn, repositioning, or watching their profile-visit-to-follow ratio drop. Requires the Taplio MCP."
 ---
 
 # LinkedIn Profile Optimizer

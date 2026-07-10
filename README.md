@@ -16,8 +16,14 @@ Every skill needs the Taplio MCP connected first (see the next section). Once it
 
 **In Claude Code or Cowork**
 1. Connect the Taplio MCP (see below).
-2. Drop the `.md` file into your `~/.claude/skills/` folder (or your Cowork plugin folder).
+2. Install the skills. Fastest way, one command (installs all of them):
+   ```bash
+   npx skills add TaplioOfficial/taplio-linkedin-claude-skills
+   ```
+   Or copy any `skills/<name>/` folder from this repo into your `~/.claude/skills/` directory. Each skill lives at `skills/<name>/SKILL.md`.
 3. Reload your client, then invoke the skill by name ("use the `linkedin-post-writer` skill to turn this idea into a post").
+
+Prefer a one-click bundle that ships the skills **and** the Taplio MCP together? Install the plugin: `npx skills add TaplioOfficial/taplio-linkedin-plugin`.
 
 **In any MCP-capable client**
 1. Add the Taplio MCP server (`https://mcp.taplio.com`) in your client's MCP settings.

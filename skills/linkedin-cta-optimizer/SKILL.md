@@ -1,6 +1,6 @@
 ---
-name: linkedin-cta-optimizer
-description: Rewrite the closing of a LinkedIn post to maximize the chosen outcome (comments, shares, profile visits, DM, link clicks, follows). Diagnoses why the current CTA is weak, offers 3 to 5 alternatives ranked by likely performance. Use when the user has a finished post but the CTA is generic or absent. Requires the Taplio MCP to ground the rewrite in which of the user's own past CTAs actually drove engagement and apply the new CTA to the draft.
+name: "linkedin-cta-optimizer"
+description: "Rewrite the closing of a LinkedIn post to maximize the chosen outcome (comments, shares, profile visits, DM, link clicks, follows). Diagnoses why the current CTA is weak, offers 3 to 5 alternatives ranked by likely performance. Use when the user has a finished post but the CTA is generic or absent. Requires the Taplio MCP to ground the rewrite in which of the user's own past CTAs actually drove engagement and apply the new CTA to the draft."
 ---
 
 # LinkedIn CTA Optimizer

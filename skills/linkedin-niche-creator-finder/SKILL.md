@@ -1,6 +1,6 @@
 ---
-name: linkedin-niche-creator-finder
-description: Identify the top LinkedIn creators in a given niche, with their angle, format mix, posting frequency, and what makes their content work. Returns a ranked list with concrete observations the user can steal. Requires the Taplio MCP, which grounds the list in real high-performing posts pulled from the live LinkedIn inspiration index and the user's own niche and keywords. Use when the user is starting on LinkedIn, exploring a new niche, or looking for inspiration to model their content on.
+name: "linkedin-niche-creator-finder"
+description: "Identify the top LinkedIn creators in a given niche, with their angle, format mix, posting frequency, and what makes their content work. Returns a ranked list with concrete observations the user can steal. Requires the Taplio MCP, which grounds the list in real high-performing posts pulled from the live LinkedIn inspiration index and the user's own niche and keywords. Use when the user is starting on LinkedIn, exploring a new niche, or looking for inspiration to model their content on."
 ---
 
 # LinkedIn Niche Creator Finder

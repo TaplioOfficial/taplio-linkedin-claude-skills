@@ -1,6 +1,6 @@
 ---
-name: linkedin-hook-generator
-description: Generate 10 LinkedIn hooks for a given topic, using proven hook patterns (curiosity, contrarian, number, question, tension, before-after, callout). Returns a ranked list with the strongest hook first. Use when the user has a draft but the opening line is weak, or when they want to A/B test hooks. Requires the Taplio MCP to weight the hooks on what is actually working in the user's niche right now and stash the winner as a draft.
+name: "linkedin-hook-generator"
+description: "Generate 10 LinkedIn hooks for a given topic, using proven hook patterns (curiosity, contrarian, number, question, tension, before-after, callout). Returns a ranked list with the strongest hook first. Use when the user has a draft but the opening line is weak, or when they want to A/B test hooks. Requires the Taplio MCP to weight the hooks on what is actually working in the user's niche right now and stash the winner as a draft."
 ---
 
 # LinkedIn Hook Generator

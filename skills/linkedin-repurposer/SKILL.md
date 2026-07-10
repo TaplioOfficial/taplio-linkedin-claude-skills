@@ -1,6 +1,6 @@
 ---
-name: linkedin-repurposer
-description: Convert an existing piece of content (blog post, tweet, YouTube video transcript, podcast snippet, Notion doc) into a native LinkedIn post. Strips formatting that does not work on LinkedIn, finds the best angle, rewrites the hook for the LinkedIn feed. Use when the user already has content elsewhere and wants to recycle it. Requires the Taplio MCP to match the user's live LinkedIn voice and save each repurposed post as a draft to spread across the week.
+name: "linkedin-repurposer"
+description: "Convert an existing piece of content (blog post, tweet, YouTube video transcript, podcast snippet, Notion doc) into a native LinkedIn post. Strips formatting that does not work on LinkedIn, finds the best angle, rewrites the hook for the LinkedIn feed. Use when the user already has content elsewhere and wants to recycle it. Requires the Taplio MCP to match the user's live LinkedIn voice and save each repurposed post as a draft to spread across the week."
 ---
 
 # LinkedIn Repurposer
