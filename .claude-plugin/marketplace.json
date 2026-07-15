@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "taplio-linkedin-claude-skills",
+  "description": "17 Claude skills for LinkedIn growth by Taplio - write posts, generate hooks, build carousels, plan content, define your niche, analyze performance, and more. Connect the Taplio MCP to draft, schedule, and analyze directly.",
+  "owner": {
+    "name": "Taplio"
+  },
+  "plugins": [
+    {
+      "name": "taplio-linkedin-skills",
+      "description": "Install all 17 Taplio LinkedIn skills at once: post writing, hook generation, carousels, repurposing, story extraction, CTA optimization, niche and audience definition, content pillars and calendar, profile optimization, and analytics interpretation. Integrates with the Taplio MCP when connected.",
+      "author": {
+        "name": "Taplio"
+      },
+      "source": ".",
+      "category": "productivity"
+    }
+  ]
+}
