@@ -1,6 +1,10 @@
 {
   "name": "taplio-linkedin-skills",
-  "description": "Production-ready Claude skills for LinkedIn growth by Taplio: post writing, hook generation, carousels, repurposing, story extraction, CTA optimization, niche and audience definition, content pillars and calendar planning, profile optimization, and analytics interpretation. Integrates with the Taplio MCP when connected.",
-  "version": "1.0.0",
+  "description": "Production-ready Claude skills for LinkedIn growth by Taplio: post writing, hook generation, carousels, repurposing, story extraction, CTA optimization, niche and audience definition, content pillars and calendar planning, profile optimization, analytics interpretation, plus engagement (comment opportunities, smart comments and replies, warm leads, daily routine, tracking) and networking (connection requests, DM openers). Requires the Taplio MCP.",
+  "version": "1.1.0",
+  "author": {
+    "name": "Taplio",
+    "url": "https://taplio.com"
+  },
   "skills": "./skills/"
 }

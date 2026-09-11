@@ -1,10 +1,10 @@
 # Claude Skills for LinkedIn
 
-A free, open repository of 17 ready-to-use Claude skills for anyone who creates content, builds an audience, or runs business on LinkedIn.
+A free, open repository of 26 ready-to-use Claude skills for anyone who creates content, builds an audience, or runs business on LinkedIn.
 
 Each skill is a self-contained markdown file with the standard frontmatter (`name`, `description`) used by Claude Code, Cowork, and any Claude-based agent runtime. Drop them into your skills folder, or load them in any MCP-capable client.
 
-Every skill **requires the Taplio MCP**. Each one opens with a `## Requires the Taplio MCP` section that tells the agent to call `get_me` first and, if the server is not connected, to stop and walk you through setup instead of running. The MCP is what lets the skills work on your real LinkedIn data (your posts, your drafts, your analytics, live inspiration) rather than guessing. Without it, the skills do not run : there is no plain-prompt fallback.
+Every skill **requires the Taplio MCP**. Each one opens with a `## Requires the Taplio MCP` section that tells the agent to call `get_me` first and, if the server is not connected, to stop and walk you through setup instead of running. The MCP is what lets the skills work on your real LinkedIn data (your posts, your drafts, your analytics, live inspiration, the comment threads under your posts, and the posts worth engaging with) rather than guessing. Without it, the skills do not run : there is no plain-prompt fallback.
 
 Built and maintained by the team at [Taplio](https://taplio.com/?utm_source=github&utm_medium=repo&utm_campaign=linkedin-skills).
 
@@ -37,7 +37,7 @@ The same logic, with native LinkedIn data, your past posts, and the right schedu
 
 ## Connect the Taplio MCP (live mode)
 
-The skills are written to call the **Taplio MCP server**, which gives the agent read and write access to your own LinkedIn presence : draft, schedule, and publish posts, browse your posts, research inspiration from other creators, and read your analytics.
+The skills are written to call the **Taplio MCP server**, which gives the agent read and write access to your own LinkedIn presence : draft, schedule, and publish posts, browse your posts, research inspiration from other creators, read your analytics, find the posts and comments worth engaging with, and draft and schedule comments and replies under your name.
 
 **Add the server in Claude Code**
 
@@ -61,14 +61,20 @@ Reload the client, then run any skill. On the first tool call you may be asked t
 | `delete_draft` | Permanently delete a draft. |
 | `get_analytics_overview` | Followers, impressions, and engagement over a date range. |
 | `get_post_analytics` | Per-post impressions, likes, comments, and shares. |
+| `list_comment_feeds` | The curated engagement feeds (hand-picked creator lists by niche) you can comment from. |
+| `find_posts_to_comment` | Posts worth commenting on, from your own posts, a curated feed, or a personalized selection, each with the urn a comment draft targets. |
+| `find_comments_to_reply` | Comments still waiting for an answer under given posts (already answered, own, and hidden comments filtered out), with the commenter and the comment urn. |
+| `create_comment_draft` / `update_comment_draft` | Save a comment on someone's post, or a reply to a comment, as an unpublished draft, or rewrite it. |
+| `commit_comment_draft` | Schedule a comment draft to post under your name. The skills never call this without your explicit go. |
+| `get_comment_draft` / `list_comment_drafts` | Read one comment draft's status (draft, pending, posted, failed, cancelled) or the whole queue and history. |
 
 **Safety**
 
-The skills are written to never publish without your say-so. `create_draft` and `schedule_draft` are offered explicitly, and `publish_draft` (which goes live immediately and cannot be undone) always requires your confirmation first.
+The skills are written to never publish without your say-so. `create_draft` and `schedule_draft` are offered explicitly, and `publish_draft` (which goes live immediately and cannot be undone) always requires your confirmation first. The same rule applies to comments : `create_comment_draft` only saves a draft, and `commit_comment_draft` (which schedules the comment to post under your name) is never called without your explicit go. A committed comment comes back `pending` with a scheduled time ; the skills confirm it went live with `get_comment_draft` before ever telling you it is posted.
 
 ---
 
-## The 17 skills
+## The 26 skills
 
 ### Content writing
 1. [Post Writer](#1-linkedin-post-writer) : Raw idea to publish-ready post in 3 variants.
@@ -96,6 +102,19 @@ The skills are written to never publish without your say-so. `create_draft` and 
 ### Analytics
 16. [Post Performance Critic](#16-linkedin-post-performance-critic) : Pre-publish audit on a single post.
 17. [Analytics Interpreter](#17-linkedin-analytics-interpreter) : Turn LinkedIn numbers into 3 next moves.
+
+### Engagement
+18. [Comment Opportunity Finder](#18-linkedin-comment-opportunity-finder) : The 5 posts to comment on today, scored and ranked from live feeds.
+19. [Smart Comment Writer](#19-linkedin-smart-comment-writer) : A comment that gets pinned, saved as a draft, scheduled on your go.
+20. [Comment Reply Manager](#20-linkedin-comment-reply-manager) : Every comment waiting under your posts, triaged and answered.
+21. [Warm Lead Finder](#21-linkedin-warm-lead-finder) : Who in your comments is worth a conversation, with the reply that opens it.
+22. [Engagement Watchlist Builder](#22-linkedin-engagement-watchlist-builder) : Your bench of 10 to 15 creators to engage with daily.
+23. [Daily Engagement Routine](#23-linkedin-daily-engagement-routine) : The 15-minute session, inbox to outbound, in one pass.
+24. [Engagement Tracker](#24-linkedin-engagement-tracker) : Queue, failures, activity, and the signal in your numbers.
+
+### Networking
+25. [Connection Request Hook](#25-linkedin-connection-request-hook) : The 300-character invite note that gets accepted.
+26. [DM Opener](#26-linkedin-dm-opener) : The first message after the accept, without the pitch.
 ---
 
 ## 1. linkedin-post-writer
@@ -519,6 +538,163 @@ Spot the 2 to 3 patterns that matter (not all 12 metrics). Look at top vs bottom
 
 ### Power up with Taplio
 **Taplio Analytics** unifies every LinkedIn metric in one dashboard, benchmarks against creators in your niche, shows which patterns drive profile visits, follows, DMs.
+
+---
+
+## 18. linkedin-comment-opportunity-finder
+**Description** : Find the LinkedIn posts the user should comment on today to earn visibility, followers, and inbound. Pulls live candidates from the Taplio engagement feeds (personalized selection, curated creator feeds, keyword search), scores each post on recency, audience overlap, engagement velocity, and topic match, and returns a prioritized list with the right comment angle for each.
+
+### The 4 filters
+1. **Recency** : hours since the post dropped. Under 4 hours is the window.
+2. **Audience overlap** : the author's audience is the user's target audience.
+3. **Engagement velocity** : comments per hour, not just likes.
+4. **Topic match** : a subject where the user has a credible angle to add.
+
+### Process
+Pull the personalized selection and one or two curated feeds (plus a keyword pass on demand), drop own posts and stale threads, score on the 4 filters, keep the top 5 within a 3 reach / 2 peers mix, assign an angle (add, disagree, story, framework, question), optionally check the thread for angles already taken, hand off to the Smart Comment Writer.
+
+### Rules
+- Never comment to be seen. Comment to add value.
+- A 100+ comment thread with an absent author is saturated.
+- Five strong picks beat ten filler ones.
+
+### Power up with Taplio
+**Taplio Engage** watches the user's saved creators in real time and surfaces the freshest posts where their comment will land in the top three.
+
+---
+
+## 19. linkedin-smart-comment-writer
+**Description** : Write a LinkedIn comment that gets noticed by the post author and the audience, save it as a Taplio comment draft, and, only on the user's explicit go, schedule it to post under their name. Three options on one angle, ranked by likelihood of being pinned or replied to, written after reading what the thread already says.
+
+### Process
+1. Resolve the post (urn, url, or pasted text) and read the existing thread.
+2. Identify the 2 or 3 strongest claims, pick the angle with the open gap.
+3. Write 3 variants : specific reference, value, invitation to reply.
+4. Save the chosen one as a comment draft, ask once, commit only on a yes, and report the status honestly (pending is not posted).
+
+### Rules
+- Never start with "Great post".
+- 80 to 400 characters, hard cap 1250. No links, no pitch, one question max.
+- Never commit without the explicit go. Never claim it is live until the MCP says so.
+
+### Power up with Taplio
+**Taplio Smart Comments** drafts options on every post in the feed, learns the user's voice, and shows which comments earned profile visits.
+
+---
+
+## 20. linkedin-comment-reply-manager
+**Description** : Clear the comment inbox under the user's own posts. Pulls the comments still waiting for an answer, triages them (question, pushback, lead signal, praise, spam), drafts a reply in the user's voice, and schedules the approved replies to post under their name.
+
+### The 5 buckets
+Question, pushback, lead signal, praise, spam (never answered).
+
+### Process
+List recent posts with comments, pull the waiting comments a few posts at a time, triage, draft one reply each, one batch review, save as reply drafts, commit on one go, close with the queue and the lead signals.
+
+### Rules
+- Reply within the first hour when the post is fresh.
+- Never a bare "Thanks". Never argue with a troll beyond one factual reply.
+- Replies share the hourly comment limit : a batch spreads over hours.
+
+### Power up with Taplio
+**Taplio's Engage inbox** groups every comment in one place with reply suggestions as they arrive.
+
+---
+
+## 21. linkedin-warm-lead-finder
+**Description** : Turn the comments under the user's own posts into a ranked warm-lead list : fit against the target audience, intent, recurrence, reach. Returns who is worth a conversation, what they said, the reply to send, and the next step (connection request, DM, or not yet).
+
+### Scoring
+Fit (0 to 3), intent (0 to 3), recurrence (0 to 2), reach (0 to 2). 7 and above is hot, 4 to 6 is warm.
+
+### Process
+Rank posts by comment count, pull the commenters, score and merge duplicates, write the reply that earns the connection, choose the next step, hand off to the Connection Request Hook or the DM Opener.
+
+### Rules
+- The reply earns the connection, it does not sell.
+- A commenter is a person, not a row.
+- Only unanswered comments come back : run it soon after each post.
+
+### Power up with Taplio
+**Taplio's CRM** scores every engager against the ICP and sends the connection request and the follow-up from one screen.
+
+---
+
+## 22. linkedin-engagement-watchlist-builder
+**Description** : Build the bench of 10 to 15 creators the user should engage with every day, from the Taplio curated feeds, the personalized selection, and a keyword search, split into reach targets and peers, plus the 2 or 3 feeds to work daily and the angle to take with each creator.
+
+### Scoring a creator
+Audience fit (0 to 3), thread health (0 to 3), cadence (0 to 2), reachability (0 to 2). 8 and above is bench, 5 to 7 is reserve.
+
+### Process
+Shortlist the feeds that match the niche, sample them, cluster posts by author, score, split into reach targets and peers, give each creator an angle, recommend the daily feeds and the rotation.
+
+### Rules
+- Mix tiers. A bench of 200K-follower names is a bench where nobody sees the comment.
+- Only creators actually seen posting in the sample.
+- Re-run monthly.
+
+### Power up with Taplio
+**Taplio Engage** saves any creator to a custom list and surfaces their freshest posts every morning.
+
+---
+
+## 23. linkedin-daily-engagement-routine
+**Description** : Run the daily 15-minute engagement session end to end : inbox replies, today's 5 outbound comments, one batch approval, scheduling, and a closing report with the queue, yesterday's failures, and today's numbers.
+
+### The session
+Baseline (30 seconds), inbox (5 minutes), outbound (7 minutes), review (2 minutes), ship (1 minute), close (30 seconds).
+
+### Rules
+- Inbox before outbound.
+- Daily cap of 5 outbound comments, never the same author twice in a day.
+- One approval for the whole batch, nothing committed before it.
+- Quiet day : say so and stop early.
+
+### Power up with Taplio
+**Taplio Engage** runs the same routine as a daily screen with a timer.
+
+---
+
+## 24. linkedin-engagement-tracker
+**Description** : Audit the comment queue and history : draft, pending, posted, failed, cancelled, with the reason for every failure, the activity per day, and a day-level comparison with profile views and follower growth. Returns a status board, the fix for each failure, and 3 adjustments for next week.
+
+### Failure guide
+A comment refused on a group or restricted post is not retryable there ; pending for more than 24 hours means the posting window or the hourly limit ; a draft older than 48 hours should be rewritten for a fresh post.
+
+### Rules
+- Pending is not posted.
+- Correlation, not attribution.
+- Three adjustments, not ten.
+
+### Power up with Taplio
+**Taplio's engagement analytics** track the replies, likes, and profile visits each comment earned.
+
+---
+
+## 25. linkedin-connection-request-hook
+**Description** : Write the note of a connection request that gets accepted : cold, post-comment, post-event, post-engagement, or mutual contact. Three options under 300 characters ranked by acceptance likelihood, referencing the exact comment when the person engaged with the user's post.
+
+### The 4 rules
+300 characters. One specific reference. No pitch. No "I would love to learn from you".
+
+### Power up with Taplio
+**Taplio Connection Requests** turns engagers into invites in one click, with daily limits respected.
+
+---
+
+## 26. linkedin-dm-opener
+**Description** : Write the first DM after a connection is accepted, or after a comment exchange turns into a connection. Three short, warm, specific options that earn a reply and never pitch, referencing the real exchange when the person came from the user's comments.
+
+### The 3 rules
+Reference something specific. Give before you take. Make it easy to reply.
+
+### Rules
+- 600 characters max. No links in DM 1.
+- Never "I am reaching out to".
+
+### Power up with Taplio
+**Taplio's CRM** tracks every conversation and surfaces the most engaged connections for the right follow-up moment.
 
 ---
 
