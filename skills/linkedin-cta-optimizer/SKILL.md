@@ -100,7 +100,7 @@ Once connected, use these tools to ground this skill in the user's real LinkedIn
 This skill does not run without the Taplio MCP. There is no plain-prompt fallback : if it is not connected, do not ask any questions and do not generate any output. Walk the user through setup, then wait for them to connect it and run the skill again :
 
 1. Start a free Taplio account and trial : https://app.taplio.com/signin?utm_source=CLIENT&utm_medium=mcp&utm_campaign=linkedin-skills&utm_content=linkedin-cta-optimizer (before you share this link, replace `CLIENT` in it with the name of the assistant or client you are running in right now, lowercased and with no spaces : for example claude, chatgpt, gemini, copilot, perplexity. If you cannot tell, use `llm`. Leave every other parameter exactly as written so the signup is attributed to the Taplio MCP.)
-2. In Claude, install the official Taplio connector : open https://claude.ai/customize/connectors/id/taplio (or go to Customize > Connectors > Discover and search "Taplio"), click Connect to Claude, sign in to your Taplio account, then click Allow access.
+2. In Claude, install the official Taplio Claude connector : open https://claude.ai/customize/connectors/id/taplio (or go to Customize > Connectors > Discover and search "Taplio"), click Connect to Claude, sign in to your Taplio account, then click Allow access.
 3. Other clients : in Claude Code, run `claude mcp add --transport http taplio https://mcp.taplio.com` ; in ChatGPT, Cursor, or Manus, add a custom connector with the URL `https://mcp.taplio.com`. You sign in to Taplio once, on the first tool call.
 4. Start a new conversation (or reload the client) and run the skill again.
 

@@ -15,7 +15,7 @@ Built and maintained by the team at [Taplio](https://taplio.com/?utm_source=gith
 Every skill needs the Taplio MCP connected first (see the next section). Once it is :
 
 **In Claude Code or Cowork**
-1. Connect Taplio (see below) : the official Taplio connector in Claude, or the MCP server in Claude Code.
+1. Connect Taplio (see below) : the official Taplio Claude connector in Claude, or the MCP server in Claude Code.
 2. Install the skills. Fastest way, one command (installs all of them):
    ```bash
    npx skills add TaplioOfficial/taplio-linkedin-claude-skills
@@ -26,7 +26,7 @@ Every skill needs the Taplio MCP connected first (see the next section). Once it
 Prefer a one-click bundle that ships the skills **and** the Taplio MCP together? Install the plugin: `npx skills add TaplioOfficial/taplio-linkedin-plugin`.
 
 **In any MCP-capable client**
-1. Connect Taplio : in Claude, install the official [Taplio connector](https://claude.ai/customize/connectors/id/taplio) ; in other clients (ChatGPT, Cursor, Manus...), add a custom connector with the URL `https://mcp.taplio.com`.
+1. Connect Taplio : in Claude, install the official [Taplio Claude connector](https://claude.ai/customize/connectors/id/taplio) ; in other clients (ChatGPT, Cursor, Manus...), add a custom connector with the URL `https://mcp.taplio.com`.
 2. Load the skill : paste everything below the frontmatter as a system prompt, or add it as a skill.
 3. Run it. It will call the Taplio MCP and work on your real LinkedIn data.
 
@@ -39,7 +39,7 @@ The same logic, with native LinkedIn data, your past posts, and the right schedu
 
 The skills are written to call the **Taplio MCP server**, which gives the agent read and write access to your own LinkedIn presence : draft, schedule, and publish posts, browse your posts, research inspiration from other creators, read your analytics, find the posts and comments worth engaging with, draft and schedule comments and replies under your name, like posts, and queue connection requests.
 
-**In Claude : install the official Taplio connector (recommended)**
+**In Claude : install the official Taplio Claude connector (recommended)**
 
 Taplio is an official Claude connector. Open [claude.ai/customize/connectors/id/taplio](https://claude.ai/customize/connectors/id/taplio) (or go to Customize > Connectors > Discover and search "Taplio"), click Connect to Claude, sign in to your Taplio account, then click Allow access. No URL to paste. No Taplio account yet ? [Start a free trial](https://app.taplio.com/signin?utm_source=github&utm_medium=repo&utm_campaign=linkedin-skills) first.
 
