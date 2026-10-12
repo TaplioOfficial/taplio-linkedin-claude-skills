@@ -15,7 +15,7 @@ Built and maintained by the team at [Taplio](https://taplio.com/?utm_source=gith
 Every skill needs the Taplio MCP connected first (see the next section). Once it is :
 
 **In Claude Code or Cowork**
-1. Connect the Taplio MCP (see below).
+1. Connect Taplio (see below) : the official Taplio connector in Claude, or the MCP server in Claude Code.
 2. Install the skills. Fastest way, one command (installs all of them):
    ```bash
    npx skills add TaplioOfficial/taplio-linkedin-claude-skills
@@ -26,7 +26,7 @@ Every skill needs the Taplio MCP connected first (see the next section). Once it
 Prefer a one-click bundle that ships the skills **and** the Taplio MCP together? Install the plugin: `npx skills add TaplioOfficial/taplio-linkedin-plugin`.
 
 **In any MCP-capable client**
-1. Add the Taplio MCP server (`https://mcp.taplio.com`) in your client's MCP settings.
+1. Connect Taplio : in Claude, install the official [Taplio connector](https://claude.ai/customize/connectors/id/taplio) ; in other clients (ChatGPT, Cursor, Manus...), add a custom connector with the URL `https://mcp.taplio.com`.
 2. Load the skill : paste everything below the frontmatter as a system prompt, or add it as a skill.
 3. Run it. It will call the Taplio MCP and work on your real LinkedIn data.
 
@@ -35,17 +35,23 @@ The same logic, with native LinkedIn data, your past posts, and the right schedu
 
 ---
 
-## Connect the Taplio MCP (live mode)
+## Connect Taplio (live mode)
 
-The skills are written to call the **Taplio MCP server**, which gives the agent read and write access to your own LinkedIn presence : draft, schedule, and publish posts, browse your posts, research inspiration from other creators, read your analytics, find the posts and comments worth engaging with, and draft and schedule comments and replies under your name.
+The skills are written to call the **Taplio MCP server**, which gives the agent read and write access to your own LinkedIn presence : draft, schedule, and publish posts, browse your posts, research inspiration from other creators, read your analytics, find the posts and comments worth engaging with, draft and schedule comments and replies under your name, like posts, and queue connection requests.
 
-**Add the server in Claude Code**
+**In Claude : install the official Taplio connector (recommended)**
+
+Taplio is an official Claude connector. Open [claude.ai/customize/connectors/id/taplio](https://claude.ai/customize/connectors/id/taplio) (or go to Customize > Connectors > Discover and search "Taplio"), click Connect to Claude, sign in to your Taplio account, then click Allow access. No URL to paste. No Taplio account yet ? [Start a free trial](https://app.taplio.com/signin?utm_source=github&utm_medium=repo&utm_campaign=linkedin-skills) first.
+
+**In Claude Code**
 
 ```bash
 claude mcp add --transport http taplio https://mcp.taplio.com
 ```
 
-Reload the client, then run any skill. On the first tool call you may be asked to authenticate so the server can act on your account.
+**In ChatGPT, Cursor, Manus, or any other MCP client** : add a custom connector with the URL `https://mcp.taplio.com`.
+
+Start a new conversation (or reload the client), then run any skill. Outside the official Claude connector, you sign in to Taplio once on the first tool call.
 
 **Tools the skills use**
 
@@ -67,10 +73,13 @@ Reload the client, then run any skill. On the first tool call you may be asked t
 | `create_comment_draft` / `update_comment_draft` | Save a comment on someone's post, or a reply to a comment, as an unpublished draft, or rewrite it. |
 | `commit_comment_draft` | Schedule a comment draft to post under your name. The skills never call this without your explicit go. |
 | `get_comment_draft` / `list_comment_drafts` | Read one comment draft's status (draft, pending, posted, failed, cancelled) or the whole queue and history. |
+| `like_post` / `get_post_like` | Queue a like on a post or a comment (Growth plan and above), then read back its status. |
+| `send_connection_request` | Queue a plain connection request, without a note, by LinkedIn username (Enterprise plan). The skills never call this without your explicit go. |
+| `list_connection_requests` / `get_connection_request` | Read the queued connection requests and their status (pending, sent, failed, cancelled), so nobody gets a second invite. |
 
 **Safety**
 
-The skills are written to never publish without your say-so. `create_draft` and `schedule_draft` are offered explicitly, and `publish_draft` (which goes live immediately and cannot be undone) always requires your confirmation first. The same rule applies to comments : `create_comment_draft` only saves a draft, and `commit_comment_draft` (which schedules the comment to post under your name) is never called without your explicit go. A committed comment comes back `pending` with a scheduled time ; the skills confirm it went live with `get_comment_draft` before ever telling you it is posted.
+The skills are written to never publish without your say-so. `create_draft` and `schedule_draft` are offered explicitly, and `publish_draft` (which goes live immediately and cannot be undone) always requires your confirmation first. The same rule applies to comments : `create_comment_draft` only saves a draft, and `commit_comment_draft` (which schedules the comment to post under your name) is never called without your explicit go. `send_connection_request` follows the same rule : the skills confirm each person with you first and check `list_connection_requests` so nobody gets a second invite. A committed comment comes back `pending` with a scheduled time ; the skills confirm it went live with `get_comment_draft` before ever telling you it is posted.
 
 ---
 
