@@ -64,6 +64,7 @@ Approve all, or tell me which numbers to edit or drop. Nothing is scheduled unti
 
 AFTER GO
 - [N] replies scheduled. First due at [scheduled_for], last at [scheduled_for].
+- [N] comment likes queued.
 - Queue now : [pending count] pending.
 - Lead signals to follow up : [names].
 ```
@@ -90,9 +91,10 @@ Once connected, use these tools to ground this skill in real LinkedIn data inste
 4. Triage and draft per the buckets and the output format.
 5. For each approved reply, call `create_comment_draft(post_urn="<post_urn>", content="<reply>", comment_id="<comment_urn>")`. The `comment_id` is what makes it a reply to that comment instead of a new comment on the post. Keep every returned `id`. Edits before commit go through `update_comment_draft(id, content)`.
 6. On the user's explicit go, call `commit_comment_draft(id)` once per approved draft. Each commit SCHEDULES the reply : it comes back `pending` with a `scheduled_for` time, and Taplio posts it from the user's account within minutes, or hours later if the user is outside their posting window or has hit their hourly comment limit. Quote the times, never say the replies are posted, and never commit the same draft twice (rejected).
-7. Close with `list_comment_drafts(status="pending", limit=50)` for the queue. If the user asks whether a reply went live, `get_comment_draft(id)` returns `posted` with a `comment_urn`, or `failed` / `cancelled` with a `failure_reason` (for example the post belongs to a group the user has not joined, or comments are restricted).
+7. Optional, in the same go : like each comment the user answers with `like_post(post_urn="<comment_urn>")`. It tells the commenter they were read, even before the reply lands. Growth plan or above ; a lower plan answers `insufficient_plan`, then skip it. The like joins the send queue : quote `scheduled_for`, never say it is done, and confirm with `get_post_like("<comment_urn>")`. Asking twice returns the same pending like. Never like spam or bait.
+8. Close with `list_comment_drafts(status="pending", limit=50)` for the queue. If the user asks whether a reply went live, `get_comment_draft(id)` returns `posted` with a `comment_urn`, or `failed` / `cancelled` with a `failure_reason` (for example the post belongs to a group the user has not joined, or comments are restricted).
 
-Limitation to state honestly : the MCP shows comments, not likes or reposts, and only comments the user has not answered yet. Threads the user already replied to on LinkedIn do not come back.
+Limitation to state honestly : the MCP shows comments, not the likes or reposts other people left, and only comments the user has not answered yet. Threads the user already replied to on LinkedIn do not come back.
 
 ### The user does not have the Taplio MCP? Stop here.
 

@@ -64,7 +64,7 @@ SKIPPED
 - [Author] : [reason, for example own post, older than 48h, competitor, passive audience]
 
 NEXT
-Reply "draft 1" (or "draft all") and I will write the comments and save them as Taplio comment drafts for your approval.
+Reply "draft 1" (or "draft all") and I will write the comments and save them as Taplio comment drafts for your approval. Add "like 1" to also queue a like on that post.
 
 DAILY HABIT
 - 5 posts per day, ideally within the first hour after they drop.
@@ -93,6 +93,7 @@ Once connected, use these tools to ground this skill in real LinkedIn data inste
 5. Compute recency and velocity yourself from `posted_at` (or `published_at`) and `metrics.comments` : the MCP returns counts, not a velocity ranking.
 6. Optional thread check on the top 3 to 5 picks : `find_comments_to_reply(post_ids="<urn1>,<urn2>,<urn3>", limit=30)` returns the comments on those posts with `text`, `commenter` (name, headline), `reply_count`, and `pinned`. Read them to see which angles are taken and whether the author is answering. Each post costs one upstream call, so pass 3 to 5 urns at a time, never a whole page.
 7. Do not draft or commit anything in this skill unless the user asks. When they do, keep each pick's `post_urn` and hand off to the Smart Comment Writer skill, which saves the text with `create_comment_draft(post_urn, content)` and only schedules it through `commit_comment_draft` after the user's explicit go.
+8. Optional like, only on the user's explicit go for each post : `like_post(post_urn)` queues a like on a pick, a light first touch before or alongside the comment (Growth plan or above ; a lower plan answers `insufficient_plan`). The like is not sent during the call : it joins the account's send queue, so quote `scheduled_for` and never say it is done. Asking again for the same post returns the same pending like. Confirm later with `get_post_like(post_urn)`, passing back the urn the response gave you. A like never replaces the comment.
 
 Limitations to state honestly : the personalized selection and the curated feeds are picked by Taplio, not by the user's own LinkedIn feed, and the MCP cannot save a custom creator list. Use the Engagement Watchlist Builder skill to build one and keep it in the assistant's memory.
 

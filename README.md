@@ -23,7 +23,7 @@ Every skill needs the Taplio MCP connected first (see the next section). Once it
    Or copy any `skills/<name>/` folder from this repo into your `~/.claude/skills/` directory. Each skill lives at `skills/<name>/SKILL.md`.
 3. Reload your client, then invoke the skill by name ("use the `linkedin-post-writer` skill to turn this idea into a post").
 
-Prefer a one-click bundle that ships the skills **and** the Taplio MCP together? Install the plugin: `npx skills add TaplioOfficial/taplio-linkedin-plugin`.
+Prefer a plugin? The same 26 skills ship as the `taplio` plugin ([TaplioOfficial/taplio-linkedin-plugin](https://github.com/TaplioOfficial/taplio-linkedin-plugin)). It does not bundle the MCP : connect the official Taplio Claude connector first.
 
 **In any MCP-capable client**
 1. Connect Taplio : in Claude, install the official [Taplio Claude connector](https://claude.ai/customize/connectors/id/taplio) ; in other clients (ChatGPT, Cursor, Manus...), add a custom connector with the URL `https://mcp.taplio.com`.
@@ -79,7 +79,7 @@ Start a new conversation (or reload the client), then run any skill. Outside the
 
 **Safety**
 
-The skills are written to never publish without your say-so. `create_draft` and `schedule_draft` are offered explicitly, and `publish_draft` (which goes live immediately and cannot be undone) always requires your confirmation first. The same rule applies to comments : `create_comment_draft` only saves a draft, and `commit_comment_draft` (which schedules the comment to post under your name) is never called without your explicit go. `send_connection_request` follows the same rule : the skills confirm each person with you first and check `list_connection_requests` so nobody gets a second invite. A committed comment comes back `pending` with a scheduled time ; the skills confirm it went live with `get_comment_draft` before ever telling you it is posted.
+The skills are written to never publish without your say-so. `create_draft` and `schedule_draft` are offered explicitly, and `publish_draft` (which goes live immediately and cannot be undone) always requires your confirmation first. The same rule applies to comments : `create_comment_draft` only saves a draft, and `commit_comment_draft` (which schedules the comment to post under your name) is never called without your explicit go. `send_connection_request` follows the same rule : the skills confirm each person with you first and check `list_connection_requests` so nobody gets a second invite. `like_post` too : a like is only queued after your go, and the skills quote when it is due instead of saying it is done. A committed comment comes back `pending` with a scheduled time ; the skills confirm it went live with `get_comment_draft` before ever telling you it is posted.
 
 ---
 

@@ -59,6 +59,7 @@ REVIEW
 
 SHIPPED
 - [n] scheduled. First due [scheduled_for], last due [scheduled_for]. Spread over [hours] because of the hourly comment limit.
+- [n] likes queued (posts commented on, comments answered).
 - Queue : [n] pending.
 
 FOLLOW UP
@@ -87,7 +88,8 @@ Once connected, use these tools to ground this skill in real LinkedIn data inste
 3. Inbox : `find_posts_to_comment(source="my_posts", limit=5)` for the latest posts with `metrics.comments` above 0, then `find_comments_to_reply(post_ids="<3 to 5 urns>", limit=50)`. Already answered, own, and hidden comments are filtered out ; each post costs one upstream call, so keep the batch small. Each comment returns `comment_urn`, `post_urn`, `text`, `commenter` (name, headline, linkedin_url), `reply_count`, `pinned`.
 4. Outbound : `find_posts_to_comment(source="for_you", limit=25)` plus `find_posts_to_comment(source="curated_feed", feed="<default feed>", limit=25)` (names from `list_comment_feeds`, exact match). Drop the user's own posts (author `profile_url` ending in their `username`). Compute hours old from `posted_at` and comments per hour from `metrics.comments`. Optional keyword pass : `search_inspiration(query, max_days_old=2, min_comments=10, lang, limit=20)`, deriving the `post_urn` from the `url` (`urn:li:activity:<id>`). Optional thread peek on the top 5 with `find_comments_to_reply(post_ids=...)` to avoid taken angles.
 5. Ship, after the batch approval only : `create_comment_draft(post_urn, content)` for each outbound comment and `create_comment_draft(post_urn, content, comment_id="<comment_urn>")` for each reply, then `commit_comment_draft(id)` once per draft. Every commit SCHEDULES the comment : status `pending`, `scheduled_for` returned, posted by Taplio from the user's account within minutes or hours depending on their posting window and hourly limit. Quote the times. Never commit the same draft twice.
-6. Close : `list_comment_drafts(status="pending", limit=50)` for the queue. If the user asks whether something went live, `get_comment_draft(id)` says `posted` (with `comment_urn`), `pending`, `failed`, or `cancelled` with the reason. For a weekly view, hand off to the Engagement Tracker skill.
+6. Likes, in the same batch approval : `like_post(post_urn)` on each outbound post the user comments on, and `like_post(post_urn="<comment_urn>")` on each inbox comment they answer (a like on a comment is separate from a like on its post). Growth plan or above ; a lower plan answers `insufficient_plan`, then skip likes for the session. Each like is queued, not sent : quote `scheduled_for`. Asking twice returns the same pending like. `get_post_like(urn)` reads it back as `pending`, `liked`, `failed`, or `cancelled`.
+7. Close : `list_comment_drafts(status="pending", limit=50)` for the queue. If the user asks whether something went live, `get_comment_draft(id)` says `posted` (with `comment_urn`), `pending`, `failed`, or `cancelled` with the reason. For a weekly view, hand off to the Engagement Tracker skill.
 
 ### The user does not have the Taplio MCP? Stop here.
 
